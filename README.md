@@ -43,10 +43,10 @@ I build things that sit between hardware and language models — an ESP32 relay 
 <table width="100%">
 <tr>
 <td width="50%">
-<a href="https://github.com/alf-2006/rafiq-system"><img src="https://github-readme-stats.vercel.app/api/pin/?username=alf-2006&repo=rafiq-system&theme=tokyonight&hide_border=true&bg_color=0D1117&icon_color=00F0FF&title_color=00F0FF" alt="Rafiq System" width="100%"/></a>
+<a href="https://github.com/alf-2006/rafiq-system"><img src="https://github-readme-stats-seven-rho-76.vercel.app/api/pin/?username=alf-2006&repo=rafiq-system&theme=tokyonight&hide_border=true&bg_color=0D1117&icon_color=00F0FF&title_color=00F0FF" alt="Rafiq System" width="100%"/></a>
 </td>
 <td width="50%">
-<a href="https://github.com/alf-2006/elahmed-retail-suite-main"><img src="https://github-readme-stats.vercel.app/api/pin/?username=alf-2006&repo=elahmed-retail-suite-main&theme=tokyonight&hide_border=true&bg_color=0D1117&icon_color=00F0FF&title_color=00F0FF" alt="Elahmed Retail Suite" width="100%"/></a>
+<a href="https://github.com/alf-2006/elahmed-retail-suite-main"><img src="https://github-readme-stats-seven-rho-76.vercel.app/api/pin/?username=alf-2006&repo=elahmed-retail-suite-main&theme=tokyonight&hide_border=true&bg_color=0D1117&icon_color=00F0FF&title_color=00F0FF" alt="Elahmed Retail Suite" width="100%"/></a>
 </td>
 </tr>
 </table>
@@ -87,10 +87,10 @@ I build things that sit between hardware and language models — an ESP32 relay 
 <table width="100%">
 <tr>
 <td width="60%">
-<img src="https://github-readme-stats.vercel.app/api?username=alf-2006&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&icon_color=00F0FF&title_color=00F0FF&text_color=c9d1d9" alt="GitHub Stats" width="100%"/>
+<img src="https://github-readme-stats-seven-rho-76.vercel.app/api?username=alf-2006&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0D1117&icon_color=00F0FF&title_color=00F0FF&text_color=c9d1d9" alt="GitHub Stats" width="100%"/>
 </td>
 <td width="40%">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=alf-2006&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00F0FF" alt="Top Languages" width="100%"/>
+<img src="https://github-readme-stats-seven-rho-76.vercel.app/api/top-langs/?username=alf-2006&layout=compact&theme=tokyonight&hide_border=true&bg_color=0D1117&title_color=00F0FF" alt="Top Languages" width="100%"/>
 </td>
 </tr>
 </table>
