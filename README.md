@@ -146,7 +146,7 @@ I build things that sit between hardware and language models — an ESP32 relay 
   <img alt="contribution snake animation" src="https://raw.githubusercontent.com/alf-2006/alf-2006/output/github-contribution-grid-snake.svg" width="100%"/>
 </picture>
 
-<sub>⚠️ يشتغل تلقائي بعد ما تفعّل الـ GitHub Action المرفقة</sub>
+
 
 </div>
 
@@ -161,7 +161,7 @@ I build things that sit between hardware and language models — an ESP32 relay 
 
 <br><br>
 
-<sub>Building in public, one commit at a time 🚀</sub>
+
 
 </div>
 
