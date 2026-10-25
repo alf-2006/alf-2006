@@ -77,7 +77,7 @@ I build things that sit between hardware and language models — an ESP32 relay 
 | Project | Description |
 |:---|:---|
 | 🩺 **RAFIQ** | Bilingual (AR/EN) AI medical & elderly-care assistant — graduation capstone with a hybrid cloud + local-LLM fallback chain |
-| 🎥 **Wasla Tech** | Arabic-language YouTube channel on AI, IT & emerging tech — [@WaslaTechOfficial](https://www.youtube.com/@wasla_tech_official) |
+| 🎥 **Wasla Tech** | Arabic-language YouTube channel on AI, IT & emerging tech — [@wasla_tech_official](https://www.youtube.com/@wasla_tech_official) |
 | 🔥 **Phantoms LLM** | 2B-parameter fine-tuned model, built with team Phantoms |
 | 🛡️ **Project Raqeeb** | Automated gas-safety system — ESP32 + smart valve relay |
 
