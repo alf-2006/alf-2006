@@ -2,7 +2,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:0B3D91,100:00F0FF&height=280&section=header&text=ALFANA&fontSize=90&fontColor=FFFFFF&animation=fadeIn&fontAlignY=32&desc=AI%20Engineer%20%C2%B7%20IoT%20Architect%20%C2%B7%20Founder%20of%20Wasla%20Tech&descAlignY=52&descSize=20&descColor=00F0FF" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=23&pause=1200&color=00F0FF&center=true&vCenter=true&width=900&height=45&lines=AI+Systems+Engineer;IoT+and+Embedded+Builder;Founder+of+Wasla+Tech;GSoC+2026+Contributor;Building+RAFIQ+Medical+AI;Vibe+Coder+and+Local+LLM+Enthusiast" alt="Typing SVG"/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=23&pause=1200&color=00F0FF&center=true&vCenter=true&width=900&height=45&lines=AI+Systems+Engineer;IoT+and+Embedded+Builder;Founder+of+Wasla+Tech;Building+RAFIQ+Medical+AI;Vibe+Coder+and+Local+LLM+Enthusiast" alt="Typing SVG"/>
 
 <p>
   <img src="https://img.shields.io/badge/📍-Alexandria,_Egypt-0D1117?style=for-the-badge&labelColor=0D1117&color=00F0FF"/>
@@ -11,8 +11,7 @@
 
 <p>
   <img src="https://komarev.com/ghpvc/?username=alf-2006&color=00f0ff&style=for-the-badge&label=PROFILE+VIEWS"/>
-  <a href="https://www.youtube.com/@WaslaTechOfficial"><img src="https://img.shields.io/badge/YouTube-Wasla_Tech-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/></a>
-  <img src="https://img.shields.io/badge/GSoC-2026_Contributor-FF00FF?style=for-the-badge&logo=googlesummerofcode&logoColor=white"/>
+  <a href="https://www.youtube.com/@wasla_tech_official"><img src="https://img.shields.io/badge/YouTube-Wasla_Tech-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/></a>
   <img src="https://img.shields.io/badge/Open_to-Collaborate-00F0FF?style=for-the-badge"/>
 </p>
 
@@ -31,7 +30,6 @@ OS:        Ubuntu 24.04 LTS  (fish 🐟 shell)
 Role:      AI Team Leader @ Phantoms
 Founder:   Wasla Tech | وصلة تك
 Flagship:  RAFIQ — Bilingual AI Health Assistant
-Status:    GSoC 2026 Contributor
 Focus:     Local LLMs · IoT · Vibe Coding
 Location:  Alexandria, Egypt
 --------------------------------------------------
@@ -79,7 +77,7 @@ I build things that sit between hardware and language models — an ESP32 relay 
 | Project | Description |
 |:---|:---|
 | 🩺 **RAFIQ** | Bilingual (AR/EN) AI medical & elderly-care assistant — graduation capstone with a hybrid cloud + local-LLM fallback chain |
-| 🎥 **Wasla Tech** | Arabic-language YouTube channel on AI, IT & emerging tech — [@WaslaTechOfficial](https://www.youtube.com/@WaslaTechOfficial) |
+| 🎥 **Wasla Tech** | Arabic-language YouTube channel on AI, IT & emerging tech — [@WaslaTechOfficial](https://www.youtube.com/@wasla_tech_official) |
 | 🔥 **Phantoms LLM** | 2B-parameter fine-tuned model, built with team Phantoms |
 | 🛡️ **Project Raqeeb** | Automated gas-safety system — ESP32 + smart valve relay |
 
@@ -156,7 +154,7 @@ I build things that sit between hardware and language models — an ESP32 relay 
 
 <div align="center">
 
-<a href="https://www.youtube.com/@WaslaTechOfficial"><img src="https://img.shields.io/badge/YouTube-Wasla_Tech-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/></a>
+<a href="https://www.youtube.com/@wasla_tech_official"><img src="https://img.shields.io/badge/YouTube-Wasla_Tech-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/></a>
 <img src="https://img.shields.io/github/followers/alf-2006?style=for-the-badge&color=00F0FF&labelColor=0D1117&logo=github&logoColor=white&label=Followers"/>
 
 <br><br>
