@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:0B3D91,100:00F0FF&height=280&section=header&text=ALFANA&fontSize=90&fontColor=FFFFFF&animation=fadeIn&fontAlignY=32&desc=AI%20Engineer%20%C2%B7%20IoT%20Architect%20%C2%B7%20Founder%20of%20Wasla%20Tech&descAlignY=52&descSize=20&descColor=00F0FF" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D1117,50:0B3D91,100:00F0FF&height=280&section=header&text=ALFANA&fontSize=90&fontColor=FFFFFF&animation=fadeIn&fontAlignY=32&desc=AI%20Engineer%20%C2%B7%20IoT%20Architect%20%C2%B7%20Team%20Leader%20%40%20Wasla%20Tech&descAlignY=52&descSize=20&descColor=00F0FF" width="100%"/>
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=23&pause=1200&color=00F0FF&center=true&vCenter=true&width=900&height=45&lines=AI+Systems+Engineer;IoT+and+Embedded+Builder;Founder+of+Wasla+Tech;Building+RAFIQ+Medical+AI;Vibe+Coder+and+Local+LLM+Enthusiast" alt="Typing SVG"/>
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=23&pause=1200&color=00F0FF&center=true&vCenter=true&width=900&height=45&lines=AI+Systems+Engineer;IoT+and+Embedded+Builder;Team+Leader+%40+Wasla+Tech;Building+RAFIQ+Medical+AI;Vibe+Coder+and+Local+LLM+Enthusiast" alt="Typing SVG"/>
 
 <p>
   <img src="https://img.shields.io/badge/📍-Alexandria,_Egypt-0D1117?style=for-the-badge&labelColor=0D1117&color=00F0FF"/>
@@ -28,7 +28,7 @@ ahmed@wasla-tech:~$ neofetch
 --------------------------------------------------
 OS:        Ubuntu 24.04 LTS  (fish 🐟 shell)
 Role:      AI Team Leader @ Phantoms
-Founder:   Wasla Tech | وصلة تك
+Team Lead: Wasla Tech | وصلة تك
 Flagship:  RAFIQ — Bilingual AI Health Assistant
 Focus:     Local LLMs · IoT · Vibe Coding
 Location:  Alexandria, Egypt
