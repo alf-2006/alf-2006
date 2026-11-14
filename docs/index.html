@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pointillist AI — Ahmed · generative portrait</title>
+<meta name="description" content="A portrait rebuilt as 27,000 color dots: halftone lattice, edge tracing, contour isolines and a neural mesh — by AI.">
+<style>
+  :root { --bg:#0D1117; --fg:#c9d1d9; --cyan:#00F0FF; --mag:#FF00FF; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--fg); font-family:ui-monospace,'Fira Code',Menlo,monospace;
+         min-height:100vh; display:flex; flex-direction:column; align-items:center; overflow-x:hidden; }
+  header { text-align:center; padding:26px 16px 6px; }
+  h1 { font-size:clamp(18px,3.2vw,30px); color:#fff; letter-spacing:.12em; }
+  h1 b { color:var(--cyan); }
+  .sub { color:#8b949e; font-size:13px; margin-top:6px; }
+  .wrap { position:relative; width:min(94vw,760px); margin:14px auto 4px; }
+  canvas { width:100%; height:auto; display:block; border:1px solid #1f2937; border-radius:14px;
+           background:#0D1117; box-shadow:0 0 42px rgba(0,240,255,.07), inset 0 0 70px rgba(0,0,0,.5); touch-action: none; }
+  .hud { position:absolute; top:10px; left:14px; font-size:11px; color:#4a5568; pointer-events:none; }
+  nav { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin:16px 0 8px; }
+  button { background:transparent; color:var(--fg); border:1px solid #30363d; border-radius:999px;
+           padding:8px 18px; font:600 13px ui-monospace,monospace; cursor:pointer; transition:.25s; }
+  button:hover { border-color:var(--cyan); color:var(--cyan); box-shadow:0 0 14px rgba(0,240,255,.35); }
+  button.on { background:var(--cyan); color:#04121a; border-color:var(--cyan); }
+  .stats { display:flex; gap:22px; margin:10px 0 4px; font-size:12px; color:#8b949e; flex-wrap:wrap; justify-content:center; }
+  .stats b { color:var(--cyan); }
+  footer { color:#586069; font-size:12px; text-align:center; padding:14px 18px 26px; line-height:1.7; }
+  a { color:var(--cyan); text-decoration:none; }
+  .glitch { animation:fl .9s steps(2) 1; } @keyframes fl { 50% { opacity:.4; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>&lt;<b>POINTILLIST</b> AI /&gt;</h1>
+  <div class="sub">one photo → 27,536 sampled color dots → four generative layouts. move your cursor through the portrait.</div>
+</header>
+
+<div class="wrap">
+  <canvas id="c"></canvas>
+  <div class="hud" id="hud">booting vision pipeline…</div>
+</div>
+
+<nav id="nav"></nav>
+<div class="stats" id="stats"></div>
+
+<footer>
+  Generated end-to-end by an AI agent: crop · tone map · Sobel edge field · contour isolines · k-NN mesh.<br>
+  Source of truth: <a href="https://github.com/alf-2006/alf-2006/tree/main/assets">assets/</a> ·
+  <a href="https://raw.githubusercontent.com/alf-2006/alf-2006/main/generative/dotty.py">dotty.py</a> ·
+  <a href="https://github.com/alf-2006/alf-2006">repo</a>
+</footer>
+
+<script>
+(async () => {
+  const D = await (await fetch('dots.json')).json();
+  const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+  const DPR = Math.min(devicePixelRatio || 1, 2);
+  let W = D.w, H = D.h;
+
+  function fit() {
+    const cssW = cv.clientWidth || cv.parentElement.clientWidth;
+    const cssH = cssW * H / W;
+    cv.style.height = cssH + 'px';
+    cv.width = Math.round(cssW * DPR); cv.height = Math.round(cssH * DPR);
+  }
+  addEventListener('resize', fit);
+
+  const L = D.layouts, names = ['lattice', 'edge', 'contour', 'mesh'];
+  const maxN = Math.max(...names.map(k => L[k].x.length));
+  // pre-resolve per-dot target arrays to full length (missing dots get r=0, hidden)
+  const tgt = {};
+  for (const k of names) {
+    const s = L[k], n = s.x.length;
+    tgt[k] = { x: s.x, y: s.y, r: s.r, c: s.c, n };
+  }
+
+  // particle state
+  const px = new Float32Array(maxN), py = new Float32Array(maxN), pr = new Float32Array(maxN);
+  const hue = Array(maxN).fill('ffffff');
+  const seedX = new Float32Array(maxN), seedY = new Float32Array(maxN);
+  for (let i = 0; i < maxN; i++) {
+    seedX[i] = Math.random() * W; seedY[i] = Math.random() * H;
+    px[i] = seedX[i]; py[i] = seedY[i]; pr[i] = 0;
+  }
+  const rgbCache = {};
+  const toRgb = hex => rgbCache[hex] || (rgbCache[hex] =
+    [parseInt(hex.slice(0,2),16), parseInt(hex.slice(2,4),16), parseInt(hex.slice(4,6),16)]);
+
+  let cur = names[0], morphT = 0, morphing = true, from = names[0], to = names[0];
+  let mouse = { x: -1e4, y: -1e4 }, hover = false;
+
+  function setLayout(k) {
+    if (k === cur && morphing) return;
+    from = cur; to = cur = k; morphT = 0; morphing = true;
+    document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.k === k));
+  }
+
+  const nav = document.getElementById('nav');
+  names.forEach((k, i) => {
+    const b = document.createElement('button');
+    b.textContent = ['▦ HALFTONE LATTICE', '✦ EDGE TRACING', '◠ CONTOUR ISOLINES', '⬡ NEURAL MESH'][i];
+    b.dataset.k = k; b.onclick = () => setLayout(k); nav.appendChild(b);
+  });
+  nav.children[0].classList.add('on');
+
+  const cv2 = el => { const r = cv.getBoundingClientRect();
+    return [ (el.clientX - r.left) / r.width * W, (el.clientY - r.top) / r.height * H ]; };
+  cv.addEventListener('pointermove', e => { [mouse.x, mouse.y] = cv2(e); hover = true; });
+  cv.addEventListener('pointerleave', () => { hover = false; mouse.x = mouse.y = -1e4; });
+
+  const hud = document.getElementById('hud');
+  const stats = document.getElementById('stats');
+  stats.innerHTML = `dots <b>${maxN.toLocaleString()}</b> · palette <b>${new Set(L.lattice.c).size}</b> colors · pitch <b>${D.cell}px</b> · canvas <b>${W}×${H}</b>`;
+
+  let last = performance.now();
+  function frame(t) {
+    const dt = Math.min(0.05, (t - last) / 1000); last = t;
+    const s = cv.width / W;
+    ctx.setTransform(s, 0, 0, s, 0, 0);
+    ctx.fillStyle = '#' + D.bg; ctx.fillRect(0, 0, W, H);
+
+    if (morphing) {
+      morphT = Math.min(1, morphT + dt * 1.35);
+      if (morphT >= 1) morphing = false;
+    }
+    const e = morphT < 1 ? 1 - Math.pow(1 - morphT, 3) : 1;
+    const A = tgt[from], B = tgt[to];
+
+    let vis = 0;
+    for (let i = 0; i < maxN; i++) {
+      const inA = i < A.n, inB = i < B.n;
+      const ax = inA ? A.x[i] : seedX[i], ay = inA ? A.y[i] : seedY[i], ar = inA ? A.r[i] : 0;
+      const bx = inB ? B.x[i] : seedX[i], by = inB ? B.y[i] : seedY[i], br = inB ? B.r[i] : 0;
+      const tx = ax + (bx - ax) * e, ty = ay + (by - ay) * e, tr = ar + (br - ar) * e;
+      px[i] += (tx - px[i]) * Math.min(1, dt * 9);
+      py[i] += (ty - py[i]) * Math.min(1, dt * 9);
+      pr[i] += (tr - pr[i]) * Math.min(1, dt * 9);
+      hue[i] = e > .5 ? (inB ? B.c[i] : (inA ? A.c[i] : '0d1117'))
+                      : (inA ? A.c[i] : (inB ? B.c[i] : '0d1117'));
+      if (pr[i] > .25) {
+        let X = px[i], Y = py[i];
+        if (hover) {
+          const dx = X - mouse.x, dy = Y - mouse.y, d2 = dx*dx + dy*dy;
+          if (d2 < 3600) { const f = (60 - Math.sqrt(d2)) / 60 * 2.1;
+            const d = Math.sqrt(d2) || 1; X += dx / d * f * 9; Y += dy / d * f * 9; }
+        }
+        ctx.fillStyle = '#' + hue[i];
+        ctx.beginPath(); ctx.arc(X, Y, pr[i], 0, 6.2832); ctx.fill();
+        vis++;
+      }
+    }
+
+    if (to === 'mesh' && e > .6 && D.links) {
+      ctx.strokeStyle = '#' + D.accent; ctx.lineWidth = .6;
+      ctx.globalAlpha = (e - .6) * 2.2 * .35;
+      ctx.beginPath();
+      for (const [a, b] of D.links) { ctx.moveTo(px[a], py[a]); ctx.lineTo(px[b], py[b]); }
+      ctx.stroke(); ctx.globalAlpha = 1;
+    }
+
+    hud.textContent = `layout ${cur} · ${vis.toLocaleString()} dots live · ${Math.round(1000 / Math.max(dt*1000,1))} fps`;
+    requestAnimationFrame(frame);
+  }
+
+  fit();
+  requestAnimationFrame(frame);
+
+  // auto tour: showcase every layout once, then settle on lattice
+  let tour = 0;
+  const iv = setInterval(() => {
+    setLayout(names[tour]); if (++tour >= names.length) clearInterval(iv);
+  }, 5200);
+  setTimeout(() => setLayout('lattice'), 5200 * names.length + 4200);
+})();
+</script>
+</body>
+</html>

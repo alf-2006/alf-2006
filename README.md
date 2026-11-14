@@ -15,6 +15,12 @@
   <img src="https://img.shields.io/badge/Open_to-Collaborate-00F0FF?style=for-the-badge"/>
 </p>
 
+<br>
+
+<a href="https://alf-2006.github.io/alf-2006/"><img src="assets/portrait-hero.png" width="430" alt="Pointillist AI portrait of Ahmed — 27,536 color dots"/></a>
+
+<sub>🧬 this photo was rebuilt by AI as <b>27,536 color dots</b> — <a href="https://alf-2006.github.io/alf-2006/"><b>▶ click for the live generative demo</b></a></sub>
+
 </div>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:0D1117,100:00F0FF&height=3&width=100%25" width="100%"/>
@@ -42,6 +48,33 @@ I build things that sit between hardware and language models — an ESP32 relay 
 </p>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:00F0FF,100:0D1117&height=3&width=100%25" width="100%"/>
+
+<h2 align="center">🧬 Generative Portrait Engine</h2>
+
+<div align="center">
+
+<table>
+<tr>
+<td align="center" width="50%">
+<img src="assets/portrait-hero.png" width="330" alt="halftone lattice layout"/>
+<br><sub><b>HALFTONE LATTICE</b> — hex grid, dot radius = local luminance</sub>
+</td>
+<td align="center" width="50%">
+<img src="assets/portrait-edge.png" width="330" alt="edge tracing layout"/>
+<br><sub><b>EDGE TRACING</b> — dots sampled on the Sobel gradient field</sub>
+</td>
+</tr>
+</table>
+
+[![Live_Demo](https://img.shields.io/badge/%E2%96%B6_LIVE_DEMO-morph_between_4_layouts-00F0FF?style=for-the-badge)](https://alf-2006.github.io/alf-2006/)
+[![SVG_Source](https://img.shields.io/badge/SVG_SOURCE-14,336_circles-FF00FF?style=for-the-badge)](assets/portrait-dots.svg)
+[![Generator](https://img.shields.io/badge/GENERATOR-dotty.py-0D1117?style=for-the-badge&logo=python&logoColor=00F0FF)](generative/dotty.py)
+
+<sub><b>pipeline:</b> screenshot → letterbox crop → tone curve → Sobel edge field → isoline &amp; k-NN sampling → 27,536 dots → SVG + canvas · <b>zero manual drawing</b> — every dot was computed by <a href="generative/dotty.py">this script</a> and animated by <a href="docs/index.html">this page</a>.</sub>
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=rect&color=0:0D1117,100:00F0FF&height=3&width=100%25" width="100%"/>
 
 <h2 align="center">🚀 Active Deployments</h2>
 
