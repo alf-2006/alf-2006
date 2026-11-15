@@ -29,7 +29,7 @@
 
 <div align="center">
 
-<a href="https://alf-2006.github.io/alf-2006/"><img src="assets/terminal-portrait.svg" width="940" alt="Animated neofetch terminal rendering Ahmed's portrait from 7,431 real-color dots"/></a>
+<a href="https://alf-2006.github.io/alf-2006/"><img src="assets/terminal-portrait.svg?v=2" width="940" alt="Animated neofetch terminal rendering Ahmed's portrait from 7,431 real-color dots"/></a>
 
 <sub>⚡ the terminal above is a <b>live SMIL animation</b>, not a screenshot — one Python pass types the command, cuts the background off the photo with an AI matting model, paints my face as <b>7,431 real-color dots</b> band by band, then prints the stats. Loops forever, inside GitHub markdown, zero JavaScript.</sub>
 
