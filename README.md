@@ -17,9 +17,9 @@
 
 <br>
 
-<a href="https://alf-2006.github.io/alf-2006/"><img src="assets/portrait-hero.png" width="430" alt="Pointillist AI portrait of Ahmed — 27,536 color dots"/></a>
+<a href="https://alf-2006.github.io/alf-2006/"><img src="assets/portrait-hero.png" width="430" alt="Pointillist AI portrait of Ahmed — 27,424 color dots"/></a>
 
-<sub>🧬 this photo was rebuilt by AI as <b>27,536 color dots</b> — <a href="https://alf-2006.github.io/alf-2006/"><b>▶ click for the live generative demo</b></a></sub>
+<sub>🧬 this photo was rebuilt by AI as <b>27,424 color dots</b> — <a href="https://alf-2006.github.io/alf-2006/"><b>▶ click for the live generative demo</b></a></sub>
 
 </div>
 
@@ -29,17 +29,9 @@
 
 <div align="center">
 
-```
-ahmed@wasla-tech:~$ neofetch
---------------------------------------------------
-OS:        Ubuntu 24.04 LTS  (fish 🐟 shell)
-Role:      Team Leader @ Wasla Tech (Aug 2026–Present)
-Previously: Co-founder & AI Team Leader on RAFIQ (until Jun 2026)
-Flagship:  RAFIQ — Bilingual AI Health Assistant
-Focus:     Local LLMs · IoT · Vibe Coding
-Location:  Alexandria, Egypt
---------------------------------------------------
-```
+<a href="https://alf-2006.github.io/alf-2006/"><img src="assets/terminal-portrait.svg" width="940" alt="Animated neofetch terminal rendering Ahmed's portrait from 7,431 real-color dots"/></a>
+
+<sub>⚡ the terminal above is a <b>live SMIL animation</b>, not a screenshot — one Python pass types the command, cuts the background off the photo with an AI matting model, paints my face as <b>7,431 real-color dots</b> band by band, then prints the stats. Loops forever, inside GitHub markdown, zero JavaScript.</sub>
 
 </div>
 
@@ -67,10 +59,11 @@ I build things that sit between hardware and language models — an ESP32 relay 
 </table>
 
 [![Live_Demo](https://img.shields.io/badge/%E2%96%B6_LIVE_DEMO-morph_between_4_layouts-00F0FF?style=for-the-badge)](https://alf-2006.github.io/alf-2006/)
-[![SVG_Source](https://img.shields.io/badge/SVG_SOURCE-14,336_circles-FF00FF?style=for-the-badge)](assets/portrait-dots.svg)
+[![SVG_Source](https://img.shields.io/badge/SVG_SOURCE-14,224_circles-FF00FF?style=for-the-badge)](assets/portrait-dots.svg)
 [![Generator](https://img.shields.io/badge/GENERATOR-dotty.py-0D1117?style=for-the-badge&logo=python&logoColor=00F0FF)](generative/dotty.py)
+[![Terminal_Engine](https://img.shields.io/badge/TERMINAL-dotty_terminal.py-0D1117?style=for-the-badge&logo=gnu-bash&logoColor=00F0FF)](generative/dotty_terminal.py)
 
-<sub><b>pipeline:</b> screenshot → letterbox crop → tone curve → Sobel edge field → isoline &amp; k-NN sampling → 27,536 dots → SVG + canvas · <b>zero manual drawing</b> — every dot was computed by <a href="generative/dotty.py">this script</a> and animated by <a href="docs/index.html">this page</a>.</sub>
+<sub><b>pipeline:</b> photo → <b>AI background removal</b> (<code>rembg · isnet-general-use</code>) → letterbox crop → tone curve → Sobel edge field → isoline &amp; k-NN sampling → 27,424 dots → SVG + canvas + SMIL terminal · <b>zero manual drawing</b> — every dot was computed by <a href="generative/dotty.py">dotty.py</a>, <a href="generative/dotty_terminal.py">dotty_terminal.py</a> and animated by <a href="docs/index.html">this page</a>.</sub>
 
 </div>
 

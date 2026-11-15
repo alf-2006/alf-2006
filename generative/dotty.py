@@ -22,7 +22,15 @@ BG = (13, 17, 23)          # #0D1117 - matches the repo theme
 ACCENT = (0, 240, 255)     # cyan used across the profile
 
 # ---------------------------------------------------------------- load / crop
-im = Image.open(SRC).convert("RGB")
+src_im = Image.open(SRC)
+matted = "A" in src_im.getbands()
+if matted:
+    # Stage 0 output (see matting.py): composite the subject onto the canvas
+    # colour so removed background samples as flat #0D1117 instead of garbage.
+    base = Image.new("RGBA", src_im.size, BG + (255,))
+    im = Image.alpha_composite(base, src_im.convert("RGBA")).convert("RGB")
+else:
+    im = src_im.convert("RGB")
 
 # The screenshot has uniform green letterbox bars. Rather than guessing, find the
 # tightest content box by rejecting rows/cols that are near-flat in both colour and
@@ -33,7 +41,10 @@ lum = a0 @ np.array([0.2126, 0.7152, 0.0722])
 
 # Letterbox bounds verified by inspecting the source screenshot:
 # dark green bar until y~277, photo content 278..1003, bar + watermark below.
-x0, x1, y0, y1 = 0, W0 - 1, 278, 1003
+if matted or H0 < 1004:
+    x0, x1, y0, y1 = 0, W0 - 1, 0, H0 - 1        # already cropped by matting.py
+else:
+    x0, x1, y0, y1 = 0, W0 - 1, 278, 1003
 print(f"content box x:{x0}-{x1} y:{y0}-{y1}")
 
 a = a0[y0:y1 + 1, x0:x1 + 1]
@@ -101,7 +112,7 @@ for r in range(rows):
         pts.append((c * CELL + CELL * 0.5 + off, r * PITCH_Y + PITCH_Y * 0.5))
 pts = np.array(pts, np.float32)
 col1, l1, _ = sample(pts)
-rad1 = CELL * (0.10 + 0.58 * (1.0 - l1) ** 0.85)
+rad1 = CELL * (0.06 + 0.62 * l1 ** 0.90)   # dark canvas: light IS the ink
 
 # ---- layout 2: edge-weighted scatter (features traced) ----
 N_EDGE = 5200
@@ -113,7 +124,7 @@ y2i, x2i = np.unravel_index(idx2, (H, W))
 pts2 = np.stack([x2i + rng.uniform(-0.4, 0.4, N_EDGE),
                  y2i + rng.uniform(-0.4, 0.4, N_EDGE)], axis=1).astype(np.float32)
 col2, l2, e2 = sample(pts2)
-rad2 = CELL * (0.16 + 0.30 * e2 + 0.26 * (1.0 - l2))
+rad2 = CELL * (0.14 + 0.32 * e2 + 0.22 * (1.0 - l2))
 
 # ---- layout 3: contour bands (isolines of brightness) ----
 lv = np.clip((lum * 13).astype(np.int32), 0, 12)
@@ -126,7 +137,7 @@ keep = rng.choice(len(by), size=N_CON, replace=False)
 pts3 = np.stack([bx[keep] + rng.uniform(-0.6, 0.6, N_CON),
                  by[keep] + rng.uniform(-0.6, 0.6, N_CON)], axis=1).astype(np.float32)
 col3, l3, e3 = sample(pts3)
-rad3 = CELL * (0.20 + 0.34 * (1.0 - l3))
+rad3 = CELL * (0.18 + 0.34 * (1.0 - l3))
 
 # ---- layout 4: neural mesh (edge points + k-NN links) ----
 mesh_idx = rng.choice(H * W, size=1600, p=w2.ravel())
@@ -149,7 +160,7 @@ def pack(p, c, r):
     }
 
 c4, l4, e4 = sample(pts4)
-rad4 = CELL * (0.22 + 0.30 * e4 + 0.22 * (1.0 - l4))
+rad4 = CELL * (0.18 + 0.30 * e4 + 0.22 * (1.0 - l4))
 LAYOUTS = {
     "lattice": pack(pts, col1, rad1),
     "edge": pack(pts2, col2, rad2),
@@ -188,8 +199,9 @@ def render(p, c, r, ss=3, glow=None):
     return img
 
 hero = render(pts, col1, rad1)
-# head + shoulders composition
-box = (int(W * 0.10), int(H * 0.22), int(W * 0.92), int(H * 0.92))
+# head + shoulders composition (the matte frame is already tighter than the raw screenshot)
+box = (int(W * 0.16), int(H * 0.20), int(W * 0.84), int(H * 0.97)) if matted \
+    else (int(W * 0.10), int(H * 0.22), int(W * 0.92), int(H * 0.92))
 hero.crop(box).save(f"{OUT}/portrait-hero.png", optimize=True)
 hero.save(f"{OUT}/portrait-full.png", optimize=True)
 render(pts2, col2, rad2, glow=True).crop(box).save(f"{OUT}/portrait-edge.png", optimize=True)
