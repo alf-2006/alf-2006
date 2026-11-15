@@ -118,7 +118,7 @@ def esc(s):
 # typed command with syntax colors
 pre, post = CMD.split("rembg", 1)
 tw = len(CMD) * 8.35
-svg.append(f'<clipPath id="type"><rect x="28" y="44" height="22" width="0">'
+svg.append(f'<clipPath id="type"><rect x="28" y="44" height="22" width="{tw:.0f}">'
            f'<animate attributeName="width" dur="{T}s" repeatCount="indefinite" '
            f'values="0;0;{tw:.0f};{tw:.0f};0" keyTimes="0;0.03;0.12;0.945;1"/></rect></clipPath>')
 svg.append('<g clip-path="url(#type)">'
@@ -138,8 +138,8 @@ svg.append(f'<line x1="600" y1="86" x2="600" y2="{VH - 52}" stroke="#1f2937" str
 # dot portrait: bands fade in top-down
 for bi, b in enumerate(bands):
     t0 = 1.1 + bi * 0.10
-    parts = [f'<g opacity="0">{anim(t0, t0 + 0.02)}>']
-    parts = [f'<g opacity="0">{anim(t0, t0 + 0.02)}']
+    parts = [f'<g opacity="1">{anim(t0, t0 + 0.02)}>']
+    parts = [f'<g opacity="1">{anim(t0, t0 + 0.02)}']
     for x, y, r, hexv in b:
         parts.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.2f}" fill="{hexv}"/>')
     parts.append('</g>')
@@ -147,15 +147,15 @@ for bi, b in enumerate(bands):
 
 # neofetch column
 IX, IY = 632, 100
-svg.append(f'<g opacity="0">{anim(4.4, 4.7)}<text x="{IX}" y="{IY}" font-family="{CH_MONO}" font-size="14">'
+svg.append(f'<g opacity="1">{anim(4.4, 4.7)}<text x="{IX}" y="{IY}" font-family="{CH_MONO}" font-size="14">'
            f'<tspan fill="#7ee787">alf@wasla-tech</tspan><tspan fill="#c9d1d9">:~$ </tspan>'
            '<tspan fill="#e6edf3">neofetch me</tspan></text></g>')
-svg.append(f'<g opacity="0">{anim(4.8, 5.1)}<text x="{IX}" y="{IY + 17}" font-family="{CH_MONO}" '
+svg.append(f'<g opacity="1">{anim(4.8, 5.1)}<text x="{IX}" y="{IY + 17}" font-family="{CH_MONO}" '
            f'font-size="13" fill="#238636">{"-" * 42}</text></g>')
 for i, (k, val, c) in enumerate(INFO):
     yy = IY + 42 + i * 25
     t0 = 5.1 + i * 0.24
-    svg.append(f'<g opacity="0">{anim(t0, t0 + 0.2)}'
+    svg.append(f'<g opacity="1">{anim(t0, t0 + 0.2)}'
                f'<text x="{IX}" y="{yy}" font-family="{CH_MONO}" font-size="13">'
                f'<tspan fill="#ffa657">{k}</tspan><tspan fill="#484f58"> : </tspan>'
                f'<tspan fill="{c}">{esc(val)}</tspan></text></g>')
@@ -163,7 +163,7 @@ for i, (k, val, c) in enumerate(INFO):
 # status line + soft cyan glow behind panel
 svg.insert(6, f'<rect x="{PX0 - 8:.0f}" y="{PY0 - 8:.0f}" width="{PW + 16:.0f}" height="{PH + 16:.0f}" '
              f'rx="10" fill="none" stroke="#16323a" stroke-width="1" opacity="0.7">' + anim(1.0, 1.3) + '</rect>')
-svg.append(f'<g opacity="0">{anim(8.2, 8.6)}<text x="30" y="{VH - 30}" font-family="{CH_MONO}" '
+svg.append(f'<g opacity="1">{anim(8.2, 8.6)}<text x="30" y="{VH - 30}" font-family="{CH_MONO}" '
            f'font-size="12" fill="#484f58">rendered by dotty_terminal.py · {total:,} real-color dots · '
            'zero pixels copied — pipeline: rembg isnet-general-use → halftone field → SMIL</text></g>')
 svg.append('</svg>')
